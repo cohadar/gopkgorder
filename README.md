@@ -1,5 +1,5 @@
 ## Go standard library package order, from least to most dependent.
-Hower to see dependency list. Number in curly braces is just a number of direct imports. Each row is one level in topsorted graph.
+Hover to see dependency list. Number in curly braces is just a number of direct imports. Each row is one level in topsorted graph.
 
 [errors{0}](https://golang.org/pkg/errors "none")
 [sort{0}](https://golang.org/pkg/sort "none")
