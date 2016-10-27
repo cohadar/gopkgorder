@@ -48,7 +48,10 @@ func (g Graph) removeBottom(bottom []string) (ret []string) {
 	}
 	for _, root := range roots(bottom) {
 		if !g.hasRoot(root) {
-			ret = append(ret, root)
+			// exlude root packages like 'github.com' and 'golang.org'
+			if !strings.ContainsRune(root, '.') {
+				ret = append(ret, root)
+			}
 		}
 	}
 	return ret
