@@ -1,25 +1,18 @@
 package gopkgorder
 
-import (
-	"go/build"
-	"strings"
-)
+import "strings"
 
-func GetResult() (ret [][]string, err error) {
-	graph, err := GetGraph(&build.Default)
-	if err != nil {
-		return
-	}
+func (g Graph) GetOrderedPackages() (ret [][]string, err error) {
 	for {
-		bottom := graph.extractBottom()
+		bottom := g.extractBottom()
 		if len(bottom) == 0 {
-			if len(graph) == 0 {
+			if len(g) == 0 {
 				break
 			} else {
 				panic("graph not acyclic")
 			}
 		}
-		if out := graph.removeBottom(bottom); len(out) > 0 {
+		if out := g.removeBottom(bottom); len(out) > 0 {
 			ret = append(ret, out)
 		}
 	}
