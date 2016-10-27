@@ -11,7 +11,7 @@ func links(row []string) string {
 	ret := ""
 	for _, pkg := range row {
 		// TODO: add dependencies in hower text and maybe dependency count as superscript
-		ret += fmt.Sprintf("[%s](https://golang.org/pkg/%s \"%s\") ", pkg, pkg, pkg)
+		ret += fmt.Sprintf("[%s](https://golang.org/pkg/%s \"%s\")\n", pkg, pkg, pkg)
 	}
 	return ret
 }
