@@ -1,6 +1,7 @@
 ## Go standard library package order, from least to most dependent.
 Hover to see dependency list. Number in curly braces is just a number of direct imports. Each row is one level in topsorted graph.
 
+[builtin{0}](https://golang.org/pkg/builtin "nil")
 [errors{0}](https://golang.org/pkg/errors "nil")
 [sort{0}](https://golang.org/pkg/sort "nil")
 [unicode{0}](https://golang.org/pkg/unicode "nil")
