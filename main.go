@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go/build"
+	"runtime"
 	"sort"
 	"strings"
 
@@ -34,7 +35,6 @@ func links(graph order.Graph, row []string) string {
 	return ret
 }
 
-// TODO: generate README.md with template
 func main() {
 	graph, err := order.GetGraph(&build.Default)
 	if err != nil {
@@ -49,7 +49,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(HEADER)
+	fmt.Print(HEADER)
+	fmt.Printf("Go Version: %s\n\n", runtime.Version())
 	for _, row := range rows {
 		sort.Strings(row)
 		fmt.Println(links(graph, row))
