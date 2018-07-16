@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/cohadar/gopkgorder/graph"
 	"github.com/cohadar/gopkgorder/order"
 )
 
@@ -26,10 +27,10 @@ func dependencyText(deps []string) (ret string) {
 	return
 }
 
-func links(graph order.Graph, row []string) string {
+func links(g graph.Graph, row []string) string {
 	ret := ""
 	for _, pkg := range row {
-		deps := graph.GetDependencies(pkg)
+		deps := g.GetDependencies(pkg)
 		ret += fmt.Sprintf(LINK, pkg, len(deps), pkg, dependencyText(deps))
 	}
 	return ret

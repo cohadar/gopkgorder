@@ -3,16 +3,14 @@ package order
 import (
 	"go/build"
 
+	"github.com/cohadar/gopkgorder/graph"
 	"golang.org/x/tools/go/buildutil"
 )
 
-// graph of package import dependencies
-type Graph map[string]map[string]bool
-
 // creates a new graph from build context.
 // example: GetGraph(&build.Default)
-func GetGraph(context *build.Context) (graph Graph, err error) {
-	graph = make(Graph)
+func GetGraph(context *build.Context) (g graph.Graph, err error) {
+	g = graph.NewGraph()
 	defer func() {
 		if r := recover(); r != nil {
 			err = recover().(error)
@@ -39,27 +37,10 @@ func GetGraph(context *build.Context) (graph Graph, err error) {
 		}
 		if bp != nil {
 			for _, imp := range bp.Imports {
-				graph.addEdge(path, absPath(imp))
+				g.AddEdge(path, absPath(imp))
 			}
 			// range bp.TestImports not used to avoid cycles
 		}
 	})
 	return
-}
-
-func (g Graph) addEdge(from, to string) {
-	if to == "C" {
-		return // "C" is fake package
-	}
-	g.addNode(from)
-	g.addNode(to)
-	g[from][to] = true
-}
-
-func (g Graph) addNode(node string) {
-	edges := g[node]
-	if edges == nil {
-		edges = make(map[string]bool)
-		g[node] = edges
-	}
 }

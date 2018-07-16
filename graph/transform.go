@@ -1,6 +1,8 @@
-package order
+package graph
 
-import "strings"
+import (
+	"strings"
+)
 
 func (g Graph) GetOrderedPackages() (ret [][]string, err error) {
 	for {
