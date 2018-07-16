@@ -7,7 +7,7 @@ import (
 	"golang.org/x/tools/go/buildutil"
 )
 
-// creates a new graph from build context.
+// GetGraph creates a golang package dependency graph
 // example: GetGraph(&build.Default)
 func GetGraph(context *build.Context) (g graph.Graph, err error) {
 	g = graph.NewGraph()
@@ -39,7 +39,7 @@ func GetGraph(context *build.Context) (g graph.Graph, err error) {
 			for _, imp := range bp.Imports {
 				g.AddEdge(path, absPath(imp))
 			}
-			// range bp.TestImports not used to avoid cycles
+			// bp.TestImports not used because they import anything they want
 		}
 	})
 	return
