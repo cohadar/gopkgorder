@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/cohadar/gopkgorder"
+	"github.com/cohadar/gopkgorder/order"
 )
 
 const (
@@ -25,7 +25,7 @@ func dependencyText(deps []string) (ret string) {
 	return
 }
 
-func links(graph gopkgorder.Graph, row []string) string {
+func links(graph order.Graph, row []string) string {
 	ret := ""
 	for _, pkg := range row {
 		deps := graph.GetDependencies(pkg)
@@ -36,7 +36,7 @@ func links(graph gopkgorder.Graph, row []string) string {
 
 // TODO: generate README.md with template
 func main() {
-	graph, err := gopkgorder.GetGraph(&build.Default)
+	graph, err := order.GetGraph(&build.Default)
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +45,7 @@ func main() {
 		panic(err)
 	}
 	// build graph again because GetOrderedPackages is destructive
-	graph, err = gopkgorder.GetGraph(&build.Default)
+	graph, err = order.GetGraph(&build.Default)
 	if err != nil {
 		panic(err)
 	}

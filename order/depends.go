@@ -1,4 +1,4 @@
-package gopkgorder
+package order
 
 import "strings"
 
